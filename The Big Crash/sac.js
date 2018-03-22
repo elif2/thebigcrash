@@ -1,8 +1,6 @@
-var polA;
-var insects = [];
-var nombreInsects = 8;
+var sacs = [];
 
-function Polygone(_n,_cx,_cy,_rx,_ry,_vari,_ang,_cr) {
+function Bloc(_n,_cx,_cy,_rx,_ry,_vari) {
   this.angle = 360.0 / _n;
   this.tabPoint = [];
   this.cx=_cx;
@@ -10,11 +8,8 @@ function Polygone(_n,_cx,_cy,_rx,_ry,_vari,_ang,_cr) {
   this.rx=_rx/2;
   this.ry=_ry/2;
   this.vari=_vari;
-  this.ang=_ang;
-  this.cr=_cr;
   this.cx_p=this.cx;
   this.cy_p=this.cy;
-  this.ang_p=this.ang;
 
   for (var i = 0; i < _n; i++) {
         this.tabPoint.push(new PointV(this.vari));
@@ -41,19 +36,14 @@ function Polygone(_n,_cx,_cy,_rx,_ry,_vari,_ang,_cr) {
 
     var r = 12 ;
 
-    //push();
-    //translate(55,0);
     beginShape();
     fill(255)
     stroke(0);
     strokeWeight(2);
-    ellipse(this.cr,0,r,r);
     endShape(CLOSE);
-    pop();
 
     this.cx -= (this.cx-this.cx_p)*0.05;
     this.cy -= (this.cy-this.cy_p)*0.05;
-    this.ang -= (this.ang-this.ang_p)*0.05;
   }
 
   this.animate = function(nx,ny){
@@ -61,23 +51,4 @@ function Polygone(_n,_cx,_cy,_rx,_ry,_vari,_ang,_cr) {
     this.cy_p=ny;
   }
 
-  this.animateAng = function(na){
-    this.ang_p=na;
-  }
-
 };
-
-
-
-
-
-function PointV(v){
-    this.amp=v;
-    this.time=random(1);
-    this.deca = random(1);
-    this.vit=random(0.01);
-    this.get = function(){
-        this.time+=this.vit;
-        return noise(this.deca+this.time)*this.amp;
-    }
-}
