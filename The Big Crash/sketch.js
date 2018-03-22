@@ -1,5 +1,6 @@
 var scroll = 0;
 var etat = 0;
+
 // pour retailler la fenetre
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -13,12 +14,12 @@ function setup() {
 
   var cx=width/2;
   var cy=height/2;
-
   var ang=PI*2/nombreInsects;
+
   for(i=0; i<nombreInsects; i++) {
     append(insects, new Polygone(15,cx+cos(ang*(i-1))*200,cy+sin(ang*(i-1))*200,50,35,10,ang*(i-1)-PI));
   };
-	
+
 	insects.pop();
 }
 
@@ -30,44 +31,41 @@ function draw() {
     insects[i].display();
   };
 
+  /*if((scroll>=0)&&(scroll<20)){
+    insects[1].animate(ang,ang);
+  }*/
 
-  if((scroll>=100)&&(scroll<180)){
-    var cx=width/2;
-    var cy=height/2;
-    var ang=PI*2/nombreInsects;
-    for(i=0; i<insects.length; i++) {
-      insects[i].animate(cx+cos(ang*(i-1))*500,cy+sin(ang*(i-1))*500);
-    };
-	etat = 1;
+
+  if((scroll>=5)&&(scroll<20)&&(etat!=1)){
+
+    insects[6].animate((insects[6].cx)-30,(insects[6].cy)+40)
+    insects[5].animate((insects[5].cx)+10,(insects[5].cy)-40)
+    insects[5].animateAng(-(PI/12))
+
+	   etat = 1;
   }
 
 
-  if((scroll>=180)&&(scroll<260)){
-    var cx=width/2;
-    var cy=height/2;
-    var ang=PI*2/nombreInsects;
-    for(i=0; i<insects.length; i++) {
-      insects[i].animate(cx+cos(ang*(i-1))*100,cy+sin(ang*(i-1))*100);
-	  if(etat==3){insects[i].animateAng(ang*(i-1)-PI);}
-    };
-	etat = 2;
+  if((scroll>=20)&&(scroll<40)){
+
+    insects[6].animateAng(-(PI/3))
+    insects[5].animateAng(PI/3)
+
+  	etat = 2;
   }
 
 
-  if(scroll>=260){
-    var cx=width/2;
-    var cy=height/2;
-    var ang=PI*2/nombreInsects;
-    for(i=0; i<insects.length; i++) {
-      insects[i].animate(cx+i*40,cy);
-      insects[i].animateAng(PI);
-    };
-	etat = 3;
+  if((scroll>=40)&&(etat!=3)){
+
+    insects[6].animate((insects[6].cx)-25,(insects[6].cy)+60)
+    //insects[5].animate((insects[5].cx)+10,(insects[5].cy)-40)
+
+	   etat = 3;
   }
 
 }
 
 function mouseWheel(event) {
-  print(event.delta);
   scroll -= event.delta;
+  print(scroll);
 }
