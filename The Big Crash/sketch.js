@@ -1,5 +1,5 @@
 var scroll = 0;
-var inde;
+var etat = 0;
 // pour retailler la fenetre
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -9,52 +9,52 @@ function windowResized() {
 // setup
 function setup() {
 
-  createCanvas(windowWidth,windowHeight);
+  createCanvas(windowWidth-20,windowHeight-20);
 
   var cx=width/2;
   var cy=height/2;
 
   var ang=PI*2/nombreInsects;
   for(i=0; i<nombreInsects; i++) {
-    append(insects, new Polygone(15,cx+cos(ang*(i-1))*100,cy+sin(ang*(i-1))*100,50,35,10,ang*i-PI/4));
+    append(insects, new Polygone(15,cx+cos(ang*(i-1))*200,cy+sin(ang*(i-1))*200,50,35,10,ang*(i-1)-PI));
   };
-
-  insects.pop();
-
-  inde = new Polygone(15,0,0,50,35,15,0);
+	
+	insects.pop();
 }
 
 
 function draw() {
 
   background(255);
-  inde.display();
   for(i=0; i<insects.length; i++) {
     insects[i].display();
   };
 
 
-  if(frameCount==100){
+  if((scroll>=100)&&(scroll<180)){
     var cx=width/2;
     var cy=height/2;
     var ang=PI*2/nombreInsects;
     for(i=0; i<insects.length; i++) {
       insects[i].animate(cx+cos(ang*(i-1))*500,cy+sin(ang*(i-1))*500);
     };
+	etat = 1;
   }
 
 
-  if(frameCount==150){
+  if((scroll>=180)&&(scroll<260)){
     var cx=width/2;
     var cy=height/2;
     var ang=PI*2/nombreInsects;
     for(i=0; i<insects.length; i++) {
       insects[i].animate(cx+cos(ang*(i-1))*100,cy+sin(ang*(i-1))*100);
+	  if(etat==3){insects[i].animateAng(ang*(i-1)-PI);}
     };
+	etat = 2;
   }
 
 
-  if(frameCount==200){
+  if(scroll>=260){
     var cx=width/2;
     var cy=height/2;
     var ang=PI*2/nombreInsects;
@@ -62,17 +62,12 @@ function draw() {
       insects[i].animate(cx+i*40,cy);
       insects[i].animateAng(PI);
     };
+	etat = 3;
   }
-
-
-  //translate(scroll,0)
-  /*fill(255)
-  noStroke();
-  rect(0,(0-(scroll*10)),1600,800)*/
 
 }
 
 function mouseWheel(event) {
   print(event.delta);
-  scroll += event.delta;
+  scroll -= event.delta;
 }

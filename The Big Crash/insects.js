@@ -45,7 +45,7 @@ function Polygone(_n,_cx,_cy,_rx,_ry,_vari,_ang) {
     beginShape();
     fill(255)
     stroke(0);
-    strokeWeight(2)
+    strokeWeight(2);
     ellipse(25,0,r,r);
     endShape(CLOSE);
     pop();
