@@ -1,10 +1,12 @@
 var scroll = 0;
 var inde;
-
+// pour retailler la fenetre
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
+
+// setup
 function setup() {
 
   createCanvas(windowWidth,windowHeight);
