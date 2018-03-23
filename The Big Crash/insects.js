@@ -67,10 +67,6 @@ function Polygone(_n,_cx,_cy,_rx,_ry,_vari,_ang,_cr) {
 
 };
 
-
-
-
-
 function PointV(v){
     this.amp=v;
     this.time=random(1);
